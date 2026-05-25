@@ -9,7 +9,7 @@ app.use(express.json());
 
 // 3-views
 app.set("views", path.join(__dirname, "views"));
-app.set("view enjine", "ejs");
+app.set("view engine", "ejs");
 // 4-routes
 
 export default app;
