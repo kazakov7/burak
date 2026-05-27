@@ -1,4 +1,4 @@
-// //MIT TASK "M"
+// //MIT TASK "N"
 function palindromCheck(word) {
   let new_word = word;
   if (new_word === word.split("").reverse().join("")) {
@@ -8,7 +8,8 @@ function palindromCheck(word) {
   }
 }
 console.log(palindromCheck("kiyik"));
-console.log(palindromCheck("nos"));
+
+//MIT TASK M
 // function getSquNums(arr) {
 //   arr2 = [];
 //   for (num of arr) {
@@ -17,6 +18,7 @@ console.log(palindromCheck("nos"));
 //   return arr2;
 // }
 // console.log(getSquNums([1, 2, 3, 4]));
+
 //MIT TASK L
 // function revSent(str) {
 //   arr = [];
