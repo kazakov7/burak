@@ -1,13 +1,23 @@
+/* Project standarts
+   1) Logging standarts
+   2) Naming standarts:
+          funtion,method,vaariable=> camelCase
+          class=> PASCAL
+          folder=>KEbab
+          css=> Snake\
+   3) Error handling
+*/
+
 // //MIT TASK "N"
-function palindromCheck(word) {
-  let new_word = word;
-  if (new_word === word.split("").reverse().join("")) {
-    return true;
-  } else {
-    return false;
-  }
-}
-console.log(palindromCheck("kiyik"));
+// function palindromCheck(word) {
+//   let new_word = word;
+//   if (new_word === word.split("").reverse().join("")) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
+// console.log(palindromCheck("kiyik"));
 
 //MIT TASK M
 // function getSquNums(arr) {
