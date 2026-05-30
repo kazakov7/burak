@@ -16,7 +16,15 @@ restarauntController.getLogin = (req: Request, res: Response) => {
     console.log("getLogin");
     res.send("Login page");
   } catch (err) {
-    console.log("Error login page:", err);
+    console.log("Error getLogin:", err);
+  }
+};
+restarauntController.processLogin = (req: Request, res: Response) => {
+  try {
+    console.log("processLogin");
+    res.send("DONE");
+  } catch (err) {
+    console.log("Error processLogin:", err);
   }
 };
 restarauntController.getSignup = (req: Request, res: Response) => {
@@ -24,7 +32,15 @@ restarauntController.getSignup = (req: Request, res: Response) => {
     console.log("getSignup");
     res.send("Sign up page");
   } catch (err) {
-    console.log("Error Signup:", err);
+    console.log("Error getSignup:", err);
+  }
+};
+restarauntController.processSignup = (req: Request, res: Response) => {
+  try {
+    console.log("processSignup");
+    res.send("DONE");
+  } catch (err) {
+    console.log("Error processSignup:", err);
   }
 };
 

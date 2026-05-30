@@ -2,8 +2,17 @@ import express from "express";
 import restarauntController from "./controllers/restaraunt.controller";
 const router = express.Router();
 
+//Restoran
 router.get("/", restarauntController.goHome);
-router.get("/login", restarauntController.getLogin);
-router.get("/signup", restarauntController.getSignup);
+router
+  .get("/login", restarauntController.getLogin)
+  .post("/login", restarauntController.processLogin);
+router
+  .get("/signup", restarauntController.getSignup)
+  .post("/signup", restarauntController.processSignup);
+
+//product
+
+//User
 
 export default router;
