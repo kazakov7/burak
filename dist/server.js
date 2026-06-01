@@ -1,15 +1,21 @@
 "use strict";
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-console.log("EXECUTED!");
-const moment_1 = __importDefault(require("moment"));
-const currentTime = (0, moment_1.default)().format("YYYY MM DD");
-console.log(currentTime);
-// const person: string = "Martin";
-// const age: number = 30;
-// let arr: string[];
-// arr = ["Olma", "behi", "hurmo"];
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const mongoose_1 = __importDefault(require("mongoose"));
+const app_1 = __importDefault(require("./app"));
+mongoose_1.default
+    .connect(process.env.MONGO_URL, {})
+    .then((data) => {
+    console.log("SUCCED");
+    const PORT = process.env.PORT ?? 3005;
+    app_1.default.listen(PORT, function () {
+        console.log(`The server is running succesfully on port: ${PORT}`);
+    });
+})
+    .catch((err) => {
+    console.log("ERROR on Mongodb connection", err);
+});
