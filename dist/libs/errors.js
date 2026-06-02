@@ -14,10 +14,13 @@ var HttpCode;
 })(HttpCode || (exports.HttpCode = HttpCode = {}));
 var Message;
 (function (Message) {
-    Message["SOMETHING_VENT_WRONG"] = "Something vent wrong";
+    Message["SOMETHING_VENT_WRONG"] = "Something vent wrong!";
     Message["NO_DATA_FOUND"] = "no data is found!";
-    Message["CREATED_FAILED"] = "Create is failed";
-    Message["UPDATE_FAILED"] = "Update is failed";
+    Message["CREATED_FAILED"] = "Create is faile!";
+    Message["UPDATE_FAILED"] = "Update is failed1";
+    Message["USED_NICK_PHONE"] = "You are inserting already used phone or nick!";
+    Message["NO_MEMBER_NICK"] = "No member with that member nick!";
+    Message["WRONG_PASSWORD"] = "Wrong password, pleasse try again1";
 })(Message || (exports.Message = Message = {}));
 class Errors extends Error {
     constructor(statusCode, statusMessage) {

@@ -3,6 +3,7 @@
     "target": "ES2020",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
@@ -10,6 +11,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+
   "exclude": ["node_modules"]
 }

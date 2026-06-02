@@ -43,7 +43,7 @@ const MemberSchema = new Schema(
       type: String,
     },
   },
-  { timestamps: true }, //creatAt, updateAt
+  { timestamps: true }, //creatAt, updatedAt
 );
 
 export default mongoose.model("Member", MemberSchema);

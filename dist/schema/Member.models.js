@@ -41,37 +41,37 @@ const MemberSchema = new mongoose_1.Schema({
         enum: member_enum_1.MemberType,
         default: member_enum_1.MemberType.USER,
     },
-    MemberStatus: {
+    memberStatus: {
         type: String,
         enum: member_enum_1.MemberStatus,
         default: member_enum_1.MemberStatus.ACTIVE,
     },
-    MemberNick: {
+    memberNick: {
         type: String,
         index: { unique: true, sparse: true },
         required: true,
     },
-    MemberPhone: {
+    memberPhone: {
         type: String,
         index: { unique: true, sparse: true },
         required: true,
     },
-    MemberPassword: {
+    memberPassword: {
         type: String,
         select: false,
         required: true,
     },
-    MemberAddres: {
+    memberAddres: {
         type: String,
     },
-    MemberDesc: {
+    memberDesc: {
         type: String,
     },
-    MemberPoints: {
+    memberPoints: {
         type: Number,
         default: 0,
     },
-    MemberImage: {
+    memberImage: {
         type: String,
     },
 }, { timestamps: true });

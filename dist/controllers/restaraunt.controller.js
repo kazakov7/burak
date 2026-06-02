@@ -24,13 +24,17 @@ restarauntController.getLogin = (req, res) => {
         console.log("Error getLogin:", err);
     }
 };
-restarauntController.processLogin = (req, res) => {
+restarauntController.processLogin = async (req, res) => {
     try {
         console.log("processLogin");
-        res.send("DONE");
+        const input = req.body;
+        const memberService = new member_service_1.default();
+        const result = await memberService.processLogin(input);
+        res.send(result);
     }
     catch (err) {
         console.log("Error processLogin:", err);
+        res.send(err);
     }
 };
 restarauntController.getSignup = (req, res) => {
@@ -40,6 +44,7 @@ restarauntController.getSignup = (req, res) => {
     }
     catch (err) {
         console.log("Error getSignup:", err);
+        res.send(err);
     }
 };
 restarauntController.processSignup = async (req, res) => {

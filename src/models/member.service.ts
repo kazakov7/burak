@@ -2,6 +2,7 @@ import { MemberType } from "../libs/enums/member.enum";
 import Errors, { HttpCode, Message } from "../libs/errors";
 import { LoginInput, Member, memberInput } from "../libs/types/member";
 import MemberModels from "../schema/Member.models";
+import bcrypt from "bcryptjs";
 
 class MemberService {
   private readonly memberModel;
@@ -9,23 +10,27 @@ class MemberService {
     this.memberModel = MemberModels;
   }
 
-  public async processSignup(input: memberInput): Promise<Member> {
+  public async processSignup(input: memberInput) {
     const exist = await this.memberModel
       .findOne({ memberType: MemberType.RESTARAUNT })
       .exec();
 
     if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATED_FAILED);
-    console.log("exis", exist);
+
+    const salt = await bcrypt.genSalt();
+    input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
+
     try {
       const result = await this.memberModel.create(input);
       result.memberPassword = "";
+
       return result;
     } catch (err) {
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATED_FAILED);
     }
   }
 
-  public async processLogin(input: LoginInput): Promise<Member> {
+  public async processLogin(input: LoginInput) {
     const member = await this.memberModel
       .findOne(
         { memberNick: input.memberNick },
@@ -37,7 +42,11 @@ class MemberService {
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
     }
 
-    const isMatch = input.memberPassword === member.memberPassword;
+    const isMatch = await bcrypt.compare(
+      input.memberPassword,
+      member.memberPassword,
+    );
+    // const isMatch = input.memberPassword === member.memberPassword;
 
     if (!isMatch) {
       throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);

@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const member_enum_1 = require("../libs/enums/member.enum");
 const errors_1 = __importStar(require("../libs/errors"));
 const Member_models_1 = __importDefault(require("../schema/Member.models"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 class MemberService {
     constructor() {
         this.memberModel = Member_models_1.default;
@@ -49,15 +50,29 @@ class MemberService {
             .exec();
         if (exist)
             throw new errors_1.default(errors_1.HttpCode.BAD_REQUEST, errors_1.Message.CREATED_FAILED);
-        console.log("exis", exist);
+        const salt = await bcryptjs_1.default.genSalt();
+        input.memberPassword = await bcryptjs_1.default.hash(input.memberPassword, salt);
         try {
             const result = await this.memberModel.create(input);
-            result.MemberPassword = "";
+            result.memberPassword = "";
             return result;
         }
         catch (err) {
             throw new errors_1.default(errors_1.HttpCode.BAD_REQUEST, errors_1.Message.CREATED_FAILED);
         }
+    }
+    async processLogin(input) {
+        const member = await this.memberModel
+            .findOne({ memberNick: input.memberNick }, { memberNick: 1, memberPassword: 1 })
+            .exec();
+        if (!member) {
+            throw new errors_1.default(errors_1.HttpCode.NOT_FOUND, errors_1.Message.NO_MEMBER_NICK);
+        }
+        const isMatch = input.memberPassword === member.memberPassword;
+        if (!isMatch) {
+            throw new errors_1.default(errors_1.HttpCode.UNAUTHORIZED, errors_1.Message.WRONG_PASSWORD);
+        }
+        return await this.memberModel.findById(member._id).exec();
     }
 }
 exports.default = MemberService;

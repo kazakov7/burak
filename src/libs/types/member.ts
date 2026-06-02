@@ -1,9 +1,9 @@
 import MemberService from "../../models/member.service";
 import { MemberType } from "../enums/member.enum";
-import { ObjectId } from "mongoose";
+import { ObjectId, Types } from "mongoose";
 
 export interface Member {
-  _id: ObjectId;
+  _id: Types.ObjectId;
   memberType: MemberType;
   memberStatus: MemberService;
   memberNick: string;
@@ -13,7 +13,7 @@ export interface Member {
   memberDesc?: string;
   memberPoints: Number;
   createdAt: Date;
-  updateAt: Date;
+  updatedAt: Date;
 }
 
 export interface memberInput {
