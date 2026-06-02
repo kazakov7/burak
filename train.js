@@ -1,15 +1,26 @@
 // //MIT TASK "O"
-function calculateSumOfNumbers(arr) {
-  count = 0;
-  for (let x of arr) {
-    if (typeof x === "number") {
-      count += x;
-    }
+function objectToArray(obj) {
+  new_obj = [];
+  for (let x in obj) {
+    new_obj.push([x, obj[x]]);
   }
-  return count;
+  return new_obj;
 }
 
-console.log(calculateSumOfNumbers([10, "10", { son: 10 }, true, 35]));
+console.log(objectToArray({ a: 10, b: 20 }));
+
+// //MIT TASK "O"
+// function calculateSumOfNumbers(arr) {
+//   count = 0;
+//   for (let x of arr) {
+//     if (typeof x === "number") {
+//       count += x;
+//     }
+//   }
+//   return count;
+// }
+
+// console.log(calculateSumOfNumbers([10, "10", { son: 10 }, true, 35]));
 /* Project standarts
    1) Logging standarts
    2) Naming standarts:
