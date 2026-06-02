@@ -9,37 +9,37 @@ const MemberSchema = new Schema(
       enum: MemberType,
       default: MemberType.USER,
     },
-    MemberStatus: {
+    memberStatus: {
       type: String,
       enum: MemberStatus,
       default: MemberStatus.ACTIVE,
     },
-    MemberNick: {
+    memberNick: {
       type: String,
       index: { unique: true, sparse: true },
       required: true,
     },
-    MemberPhone: {
+    memberPhone: {
       type: String,
       index: { unique: true, sparse: true },
       required: true,
     },
-    MemberPassword: {
+    memberPassword: {
       type: String,
       select: false,
       required: true,
     },
-    MemberAddres: {
+    memberAddres: {
       type: String,
     },
-    MemberDesc: {
+    memberDesc: {
       type: String,
     },
-    MemberPoints: {
+    memberPoints: {
       type: Number,
       default: 0,
     },
-    MemberImage: {
+    memberImage: {
       type: String,
     },
   },

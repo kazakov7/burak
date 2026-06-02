@@ -10,10 +10,14 @@ export enum HttpCode {
 }
 
 export enum Message {
-  SOMETHING_VENT_WRONG = "Something vent wrong",
+  SOMETHING_VENT_WRONG = "Something vent wrong!",
   NO_DATA_FOUND = "no data is found!",
-  CREATED_FAILED = "Create is failed",
-  UPDATE_FAILED = "Update is failed",
+  CREATED_FAILED = "Create is faile!",
+  UPDATE_FAILED = "Update is failed1",
+
+  USED_NICK_PHONE = "You are inserting already used phone or nick!",
+  NO_MEMBER_NICK = "No member with that member nick!",
+  WRONG_PASSWORD = "Wrong password, pleasse try again1",
 }
 
 class Errors extends Error {

@@ -5,24 +5,29 @@ import { ObjectId } from "mongoose";
 export interface Member {
   _id: ObjectId;
   memberType: MemberType;
-  MemberStatus: MemberService;
-  MemberNick: string;
-  MemberPhone: string;
-  MemberPassword?: string;
-  MemberAddres?: string;
-  MemberDesc?: string;
-  MemberPoints: Number;
+  memberStatus: MemberService;
+  memberNick: string;
+  memberPhone: string;
+  memberPassword?: string;
+  memberAddres?: string;
+  memberDesc?: string;
+  memberPoints: Number;
   createdAt: Date;
   updateAt: Date;
 }
 
 export interface memberInput {
   memberType?: MemberType;
-  MemberStatus?: MemberService;
-  MemberNick: string;
-  MemberPhone: string;
-  MemberPassword: string;
-  MemberAddres?: string;
-  MemberDesc?: string;
-  MemberPoints?: Number;
+  memberStatus?: MemberService;
+  memberNick: string;
+  memberPhone: string;
+  memberPassword: string;
+  memberAddres?: string;
+  memberDesc?: string;
+  memberPoints?: Number;
+}
+
+export interface LoginInput {
+  memberNick: string;
+  memberPassword: string;
 }
