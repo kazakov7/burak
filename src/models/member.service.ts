@@ -30,7 +30,7 @@ class MemberService {
     }
   }
 
-  public async processLogin(input: LoginInput) {
+  public async processLogin(input: LoginInput): Promise<Member> {
     const member = await this.memberModel
       .findOne(
         { memberNick: input.memberNick },
@@ -52,7 +52,9 @@ class MemberService {
       throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
     }
 
-    return await this.memberModel.findById(member._id).exec();
+    return (await this.memberModel
+      .findById(member._id)
+      .exec()) as unknown as Member;
   }
 }
 
