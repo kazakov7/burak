@@ -13,6 +13,7 @@ memberController.signup = async (req: Request, res: Response) => {
 
     const input: MemberInput = req.body,
       result: Member = await memberService.signup(input);
+    //TODO:
 
     res.json({ member: result });
   } catch (err) {

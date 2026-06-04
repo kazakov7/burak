@@ -10,7 +10,7 @@ const restarauntController: T = {};
 restarauntController.goHome = (req: Request, res: Response) => {
   try {
     console.log("goHame");
-    res.send("Home page");
+    res.render("home");
   } catch (err) {
     console.log("Error goHome:", err);
   }
@@ -18,7 +18,7 @@ restarauntController.goHome = (req: Request, res: Response) => {
 restarauntController.getLogin = (req: Request, res: Response) => {
   try {
     console.log("getLogin");
-    res.send("Login page");
+    res.render("login");
   } catch (err) {
     console.log("Error getLogin:", err);
   }
@@ -38,7 +38,7 @@ restarauntController.processLogin = async (req: Request, res: Response) => {
 restarauntController.getSignup = (req: Request, res: Response) => {
   try {
     console.log("getSignup");
-    res.send("Sign up page");
+    res.render("signup");
   } catch (err) {
     console.log("Error getSignup:", err);
     res.send(err);
