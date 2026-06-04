@@ -1,13 +1,25 @@
-// //MIT TASK "O"
-function objectToArray(obj) {
-  new_obj = [];
-  for (let x in obj) {
-    new_obj.push([x, obj[x]]);
+// //MIT TASK "P"
+function hasProperty(obj, str) {
+  for (let k in obj) {
+    if (k === str) {
+      return true;
+    }
   }
-  return new_obj;
+  return false;
 }
 
-console.log(objectToArray({ a: 10, b: 20 }));
+console.log(hasProperty({ name: "BMW", model: "M3" }, "model"));
+console.log(hasProperty({ name: "BMW", model: "M3" }, "year"));
+// //MIT TASK "O"
+// function objectToArray(obj) {
+//   new_obj = [];
+//   for (let x in obj) {
+//     new_obj.push([x, obj[x]]);
+//   }
+//   return new_obj;
+// }
+
+// console.log(objectToArray({ a: 10, b: 20 }));
 
 // //MIT TASK "O"
 // function calculateSumOfNumbers(arr) {
