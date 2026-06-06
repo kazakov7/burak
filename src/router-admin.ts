@@ -10,6 +10,7 @@ router
 router
   .get("/signup", restarauntController.getSignup)
   .post("/signup", restarauntController.processSignup);
+router.get("/logout", restarauntController.logout);
 router.get("/check-me", restarauntController.checkAuthSession);
 
 //product

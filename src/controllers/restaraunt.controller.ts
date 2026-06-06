@@ -3,7 +3,7 @@ import { T } from "../libs/types/common";
 import MemberService from "../models/member.service";
 import { MemberType } from "../libs/enums/member.enum";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
-import { Message } from "../libs/errors";
+import Errors, { Message } from "../libs/errors";
 import session from "express-session";
 
 const memberService = new MemberService();
@@ -15,6 +15,7 @@ restarauntController.goHome = (req: Request, res: Response) => {
     res.render("home");
   } catch (err) {
     console.log("Error goHome:", err);
+    res.redirect("/admin");
   }
 };
 restarauntController.getLogin = (req: Request, res: Response) => {
@@ -23,6 +24,7 @@ restarauntController.getLogin = (req: Request, res: Response) => {
     res.render("login");
   } catch (err) {
     console.log("Error getLogin:", err);
+    res.redirect("/admin");
   }
 };
 restarauntController.processLogin = async (
@@ -40,7 +42,11 @@ restarauntController.processLogin = async (
     });
   } catch (err) {
     console.log("Error processLogin:", err);
-    res.send(err);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_VENT_WRONG;
+    res.send(
+      `<script>alert("${message}"); window.location.replace('admin/login')</script>`,
+    );
   }
 };
 restarauntController.getSignup = (req: Request, res: Response) => {
@@ -68,7 +74,22 @@ restarauntController.processSignup = async (
     });
   } catch (err) {
     console.log("Error processSignup:", err);
-    res.send(err);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_VENT_WRONG;
+    res.send(
+      `<script>alert("${message}"); window.location.replace('admin/signup')</script>`,
+    );
+  }
+};
+restarauntController.logout = async (req: AdminRequest, res: Response) => {
+  try {
+    console.log("processSignup");
+    req.session.destroy(function () {
+      res.redirect("/admin");
+    });
+  } catch (err) {
+    console.log("Error processSignup:", err);
+    res.redirect("/admin");
   }
 };
 restarauntController.checkAuthSession = async (
