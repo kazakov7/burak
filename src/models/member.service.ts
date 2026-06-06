@@ -2,7 +2,7 @@ import { MemberType } from "../libs/enums/member.enum";
 import Errors, { HttpCode, Message } from "../libs/errors";
 import { LoginInput, Member, MemberInput } from "../libs/types/member";
 import MemberModels from "../schema/Member.models";
-import bcrypt from "bcryptjs";
+const bcrypt = require("bcryptjs");
 
 class MemberService {
   private readonly memberModel;
@@ -54,7 +54,7 @@ class MemberService {
   }
 
   //SSR
-  public async processSignup(input: MemberInput) {
+  public async processSignup(input: MemberInput): Promise<Member> {
     const exist = await this.memberModel
       .findOne({ memberType: MemberType.RESTARAUNT })
       .exec();
@@ -67,8 +67,9 @@ class MemberService {
     try {
       const result = await this.memberModel.create(input);
       result.memberPassword = "";
+      console.log(result);
 
-      return result;
+      return result as unknown as Member;
     } catch (err) {
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATED_FAILED);
     }
