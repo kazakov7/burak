@@ -4,6 +4,17 @@ import router from "./routers";
 import routerAdmin from "./router-admin";
 import morgan from "morgan";
 import { MORGAN_FORMAT } from "./libs/config";
+
+import session from "express-session";
+import ConnectMongoDb from "connect-mongodb-session";
+import { Collection } from "mongoose";
+
+const MongoDbStore = ConnectMongoDb(session);
+const store = new MongoDbStore({
+  uri: String(process.env.MONGO_URL),
+  collection: "sessions",
+});
+
 // 1-Enterance
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));
@@ -11,6 +22,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan(MORGAN_FORMAT));
 // 2-sessions
+app.use(
+  session({
+    secret: String(process.env.SECRET),
+    cookie: {
+      maxAge: 1000 * 360 * 3,
+    },
+    store: store,
+    resave: true,
+    saveUninitialized: true,
+  }),
+);
 
 // 3-views
 app.set("views", path.join(__dirname, "views"));
