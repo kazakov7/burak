@@ -1,15 +1,33 @@
-// //MIT TASK "P"
-function hasProperty(obj, str) {
-  for (let k in obj) {
-    if (k === str) {
-      return true;
+// //MIT TASK "R"
+function test(str) {
+  for (x of str) {
+    if (str.includes("+")) {
+      j = 0;
+      k = 0;
+      i = str.indexOf("+");
+      j += str.slice(0, i);
+      k += str.slice(i + 1, str.length);
+    } else {
+      return "(+) operatori mavjud emas";
     }
   }
-  return false;
-}
 
-console.log(hasProperty({ name: "BMW", model: "M3" }, "model"));
-console.log(hasProperty({ name: "BMW", model: "M3" }, "year"));
+  return Number(j) + Number(k);
+}
+console.log(test("11+2"));
+
+// //MIT TASK "P"
+// function hasProperty(obj, str) {
+//   for (let k in obj) {
+//     if (k === str) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+
+// console.log(hasProperty({ name: "BMW", model: "M3" }, "model"));
+// console.log(hasProperty({ name: "BMW", model: "M3" }, "year"));
 // //MIT TASK "O"
 // function objectToArray(obj) {
 //   new_obj = [];

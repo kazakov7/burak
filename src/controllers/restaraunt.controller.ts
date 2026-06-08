@@ -9,6 +9,7 @@ import session from "express-session";
 const memberService = new MemberService();
 
 const restarauntController: T = {};
+//GET HOME PAGE
 restarauntController.goHome = (req: Request, res: Response) => {
   try {
     console.log("goHame");
@@ -18,6 +19,8 @@ restarauntController.goHome = (req: Request, res: Response) => {
     res.redirect("/admin");
   }
 };
+
+//GET Login PAGE
 restarauntController.getLogin = (req: Request, res: Response) => {
   try {
     console.log("getLogin");
@@ -27,6 +30,19 @@ restarauntController.getLogin = (req: Request, res: Response) => {
     res.redirect("/admin");
   }
 };
+
+//GET SignUp PAGE
+restarauntController.getSignup = (req: Request, res: Response) => {
+  try {
+    console.log("getSignup");
+    res.render("signup");
+  } catch (err) {
+    console.log("Error getSignup:", err);
+    res.send(err);
+  }
+};
+
+//GET PROCESS LOGIN PAGE
 restarauntController.processLogin = async (
   req: AdminRequest,
   res: Response,
@@ -49,15 +65,8 @@ restarauntController.processLogin = async (
     );
   }
 };
-restarauntController.getSignup = (req: Request, res: Response) => {
-  try {
-    console.log("getSignup");
-    res.render("signup");
-  } catch (err) {
-    console.log("Error getSignup:", err);
-    res.send(err);
-  }
-};
+
+//PROCESS SIGNUP PAGE
 restarauntController.processSignup = async (
   req: AdminRequest,
   res: Response,
@@ -81,17 +90,8 @@ restarauntController.processSignup = async (
     );
   }
 };
-restarauntController.logout = async (req: AdminRequest, res: Response) => {
-  try {
-    console.log("processSignup");
-    req.session.destroy(function () {
-      res.redirect("/admin");
-    });
-  } catch (err) {
-    console.log("Error processSignup:", err);
-    res.redirect("/admin");
-  }
-};
+
+//GET checkAuthSession PAGE
 restarauntController.checkAuthSession = async (
   req: AdminRequest,
   res: Response,
@@ -104,6 +104,19 @@ restarauntController.checkAuthSession = async (
   } catch (err) {
     console.log("Error processSignup:", err);
     res.send(err);
+  }
+};
+
+//GET LOGOUT PAGE
+restarauntController.logout = async (req: AdminRequest, res: Response) => {
+  try {
+    console.log("processSignup");
+    req.session.destroy(function () {
+      res.redirect("/admin");
+    });
+  } catch (err) {
+    console.log("Error processSignup:", err);
+    res.redirect("/admin");
   }
 };
 
