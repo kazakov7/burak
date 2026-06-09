@@ -1,20 +1,37 @@
-// //MIT TASK "R"
-function test(str) {
-  for (x of str) {
-    if (str.includes("+")) {
-      j = 0;
-      k = 0;
-      i = str.indexOf("+");
-      j += str.slice(0, i);
-      k += str.slice(i + 1, str.length);
-    } else {
-      return "(+) operatori mavjud emas";
+// //MIT TASK "S"
+function test(arr) {
+  max = arr[0];
+  for (x of arr) {
+    if (x > max) {
+      max = x;
     }
   }
-
-  return Number(j) + Number(k);
+  new_arr = [];
+  for (let i = 0; i <= max; i += 1) {
+    new_arr.push(i);
+  }
+  arr2 = new_arr.filter((x) => !arr.includes(x));
+  return arr2;
 }
-console.log(test("11+2"));
+console.log(test([3, 0, 1, 6, 8, 10, 9]));
+
+// //MIT TASK "R"
+// function test(str) {
+//   for (x of str) {
+//     if (str.includes("+")) {
+//       j = 0;
+//       k = 0;
+//       i = str.indexOf("+");
+//       j += str.slice(0, i);
+//       k += str.slice(i + 1, str.length);
+//     } else {
+//       return "(+) operatori mavjud emas";
+//     }
+//   }
+
+//   return Number(j) + Number(k);
+// }
+// console.log(test("11+2"));
 
 // //MIT TASK "P"
 // function hasProperty(obj, str) {
