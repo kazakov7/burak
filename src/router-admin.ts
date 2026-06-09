@@ -15,9 +15,21 @@ router.get("/logout", restarauntController.logout);
 router.get("/check-me", restarauntController.checkAuthSession);
 
 //product
-router.get("/product/all", productController.getAllProduct);
-router.post("/product/create", productController.createNewProduct);
-router.post("/product/:id", productController.updateChoosenProduct);
+router.get(
+  "/product/all",
+  restarauntController.verifyRestaurant,
+  productController.getAllProduct,
+);
+router.post(
+  "/product/create",
+  restarauntController.verifyRestaurant,
+  productController.createNewProduct,
+);
+router.post(
+  "/product/:id",
+  restarauntController.verifyRestaurant,
+  productController.updateChoosenProduct,
+);
 //User
 
 export default router;

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MemberService from "../models/member.service";
 import { MemberType } from "../libs/enums/member.enum";
@@ -120,4 +120,19 @@ restarauntController.logout = async (req: AdminRequest, res: Response) => {
   }
 };
 
+restarauntController.verifyRestaurant = (
+  req: AdminRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (req.session?.member?.memberType == MemberType.RESTARAUNT) {
+    req.member = req.session.member;
+    next();
+  } else {
+    const message = Message.NOT_AUTHENTICATED;
+    res.send(
+      `<script>alert("${message}"); window.location.replace('/admin/login');</script>`,
+    );
+  }
+};
 export default restarauntController;
