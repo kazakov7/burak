@@ -1,5 +1,5 @@
 // //MIT TASK "S"
-function test(arr) {
+function missingNumber(arr) {
   max = arr[0];
   for (x of arr) {
     if (x > max) {
@@ -10,10 +10,9 @@ function test(arr) {
   for (let i = 0; i <= max; i += 1) {
     new_arr.push(i);
   }
-  arr2 = new_arr.filter((x) => !arr.includes(x));
-  return arr2;
+  return new_arr.find((x) => !arr.includes(x));
 }
-console.log(test([3, 0, 1, 6, 8, 10, 9]));
+console.log(missingNumber([3, 0, 1]));
 
 // //MIT TASK "R"
 // function test(str) {
