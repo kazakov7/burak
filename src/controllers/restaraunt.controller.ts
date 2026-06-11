@@ -3,8 +3,7 @@ import { T } from "../libs/types/common";
 import MemberService from "../models/member.service";
 import { MemberType } from "../libs/enums/member.enum";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
-import Errors, { Message } from "../libs/errors";
-import session from "express-session";
+import Errors, { HttpCode, Message } from "../libs/errors";
 
 const memberService = new MemberService();
 
@@ -54,7 +53,7 @@ restarauntController.processLogin = async (
     const result = await memberService.processLogin(input);
     req.session.member = result;
     req.session.save(function () {
-      res.send(result);
+      res.redirect("/admin/product/all");
     });
   } catch (err) {
     console.log("Error processLogin:", err);
@@ -73,13 +72,18 @@ restarauntController.processSignup = async (
 ) => {
   try {
     console.log("processSignup");
+    const file = req.file;
+    if (!file)
+      throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_VENT_WRONG);
+
     const newMember: MemberInput = req.body;
+    newMember.memberImage = file?.path;
     newMember.memberType = MemberType.RESTARAUNT;
     const result = await memberService.processSignup(newMember);
 
     req.session.member = result;
     req.session.save(function () {
-      res.send(result);
+      res.redirect("/admin/product/all");
     });
   } catch (err) {
     console.log("Error processSignup:", err);

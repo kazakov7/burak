@@ -19,6 +19,7 @@ export interface Member {
 }
 
 export interface MemberInput {
+  memberImage: string;
   memberType?: MemberType;
   memberStatus?: MemberService;
   memberNick: string;
