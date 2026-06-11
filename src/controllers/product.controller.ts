@@ -52,6 +52,9 @@ productController.updateChoosenProduct = async (
 ) => {
   try {
     console.log("updateChoosenProduct");
+    const id = req.params.id;
+    const result = await productService.updateChoosenProduct(id, req.body);
+    res.status(HttpCode.OK).json({ data: result });
   } catch (err) {
     console.log("Error updateChoosenProduct:", err);
     if (err instanceof Errors) res.status(err.code).json(err);
