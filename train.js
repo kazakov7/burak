@@ -1,18 +1,26 @@
 // //MIT TASK "S"
-function missingNumber(arr) {
-  max = arr[0];
-  for (x of arr) {
-    if (x > max) {
-      max = x;
-    }
-  }
-  new_arr = [];
-  for (let i = 0; i <= max; i += 1) {
-    new_arr.push(i);
-  }
-  return new_arr.find((x) => !arr.includes(x));
+function mergeSortedArrays(arr1, arr2) {
+  arr = arr1.concat(arr2);
+  return arr.sort((a, b) => a - b);
 }
-console.log(missingNumber([3, 0, 1]));
+
+console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));
+
+// //MIT TASK "S"
+// function missingNumber(arr) {
+//   max = arr[0];
+//   for (x of arr) {
+//     if (x > max) {
+//       max = x;
+//     }
+//   }
+//   new_arr = [];
+//   for (let i = 0; i <= max; i += 1) {
+//     new_arr.push(i);
+//   }
+//   return new_arr.find((x) => !arr.includes(x));
+// }
+// console.log(missingNumber([3, 0, 1]));
 
 // //MIT TASK "R"
 // function test(str) {
