@@ -3,4 +3,8 @@
 <body>
   <h1>PRODUCTS</h1>
   <div><%=member.memberNick%></div>
+  <%products.map((value,key)=>{%>
+    <p><%=value.productName%>-<%=value.productSize%></p>
+
+  <%})%>
 </body>

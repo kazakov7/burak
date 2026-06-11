@@ -11,7 +11,9 @@ const productController: T = {};
 productController.getAllProduct = async (req: Request, res: Response) => {
   try {
     console.log("goHame");
-    res.render("products");
+    const data = await productService.getAllProduct();
+    console.log(data);
+    res.render("products", { products: data });
   } catch (err) {
     console.log("Error goHome:", err);
     if (err instanceof Errors) res.status(err.code).json(err);
