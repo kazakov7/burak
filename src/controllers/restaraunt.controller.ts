@@ -139,4 +139,17 @@ restarauntController.verifyRestaurant = (
     );
   }
 };
+
+restarauntController.getUsers = async (req: Request, res: Response) => {
+  try {
+    console.log("getUsers");
+    const result = await memberService.getUsers();
+
+    res.render("users", { users: result });
+  } catch (err) {
+    console.log("Error goHome:", err);
+    res.redirect("/admin");
+  }
+};
+
 export default restarauntController;

@@ -1,0 +1,11 @@
+
+<%- include('includes/header') %>
+
+<body>
+  <h1>USERS</h1>
+  <div><%=member.memberNick%></div>
+  <%users.map((value,key)=>{%>
+    <p><%=value.memberNick%></p>
+
+  <%})%>
+</body>
