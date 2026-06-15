@@ -1,12 +1,26 @@
-// //MIT TASK "S"
-function mergeSortedArrays(arr1, arr2) {
-  arr = arr1.concat(arr2);
-  return arr.sort((a, b) => a - b);
+// //MIT TASK "U"
+function sumOdds(num) {
+  let n = 1;
+  let sum = 0;
+  while (n < num) {
+    if (n % 2 == 1) {
+      sum++;
+    }
+    n++;
+  }
+  return sum;
 }
-
-console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));
+console.log(sumOdds(9));
 
 // //MIT TASK "S"
+// function mergeSortedArrays(arr1, arr2) {
+//   arr = arr1.concat(arr2);
+//   return arr.sort((a, b) => a - b);
+// }
+
+// console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));
+
+// //MIT TASK "T"
 // function missingNumber(arr) {
 //   max = arr[0];
 //   for (x of arr) {
