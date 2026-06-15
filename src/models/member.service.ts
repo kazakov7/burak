@@ -1,6 +1,12 @@
+import { shapeIntoMongooseObjectId } from "../libs/config";
 import { MemberType } from "../libs/enums/member.enum";
 import Errors, { HttpCode, Message } from "../libs/errors";
-import { LoginInput, Member, MemberInput } from "../libs/types/member";
+import {
+  LoginInput,
+  Member,
+  MemberInput,
+  MemberUpdateInput,
+} from "../libs/types/member";
 import MemberModels from "../schema/Member.models";
 const bcrypt = require("bcryptjs");
 
@@ -109,6 +115,17 @@ class MemberService {
 
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result as unknown as Member[];
+  }
+
+  public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {
+    const id = shapeIntoMongooseObjectId(input._id);
+
+    const result = await this.memberModel
+      .findOneAndUpdate({ _id: id }, input, { new: true })
+      .exec();
+
+    if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+    return result as unknown as Member;
   }
 }
 export default MemberService;

@@ -44,5 +44,10 @@ router.get(
   restarauntController.verifyRestaurant,
   restarauntController.getUsers,
 );
+router.post(
+  "/users/edit",
+  restarauntController.verifyRestaurant,
+  restarauntController.updateChosenUser,
+);
 
 export default router;
