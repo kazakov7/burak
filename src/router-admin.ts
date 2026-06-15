@@ -40,12 +40,12 @@ router.post(
 
 //User
 router.get(
-  "/users/all",
+  "/user/all",
   restarauntController.verifyRestaurant,
   restarauntController.getUsers,
 );
 router.post(
-  "/users/edit",
+  "/user/edit",
   restarauntController.verifyRestaurant,
   restarauntController.updateChosenUser,
 );
