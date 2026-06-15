@@ -12,7 +12,7 @@ mongoose
 
     app.listen(PORT, function () {
       console.info(`The server is running succesfully on port: ${PORT}`);
-      console.log(` Admin Project on http://localhost:${3003}/admin`);
+      console.log(` Admin Project on http://localhost:${3003}/admin \n`);
     });
   })
   .catch((err) => {

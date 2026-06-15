@@ -1,6 +1,7 @@
+html,
 body {
-  background-color: blue;
-}
-.format1 {
-  font-size: 60px;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
 }
