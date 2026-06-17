@@ -7,8 +7,6 @@ import { MORGAN_FORMAT } from "./libs/config";
 
 import session from "express-session";
 import ConnectMongoDb from "connect-mongodb-session";
-import { Collection } from "mongoose";
-import { AdminRequest } from "./libs/types/member";
 import { T } from "./libs/types/common";
 
 const MongoDbStore = ConnectMongoDb(session);
