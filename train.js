@@ -1,16 +1,30 @@
-// //MIT TASK "U"
-function sumOdds(num) {
-  let n = 1;
-  let sum = 0;
-  while (n < num) {
-    if (n % 2 == 1) {
-      sum++;
+// //MIT TASK "V"
+function countChars(word) {
+  obj = {};
+  for (x of word) {
+    if (obj[x]) {
+      obj[x] += 1;
+    } else {
+      obj[x] = 1;
     }
-    n++;
   }
-  return sum;
+  return obj;
 }
-console.log(sumOdds(9));
+console.log(countChars("hellos"));
+
+// //MIT TASK "U"
+// function sumOdds(num) {
+//   let n = 1;
+//   let sum = 0;
+//   while (n < num) {
+//     if (n % 2 == 1) {
+//       sum++;
+//     }
+//     n++;
+//   }
+//   return sum;
+// }
+// console.log(sumOdds(9));
 
 // //MIT TASK "S"
 // function mergeSortedArrays(arr1, arr2) {
