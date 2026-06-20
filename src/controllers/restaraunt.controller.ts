@@ -77,6 +77,7 @@ restarauntController.processSignup = async (
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_VENT_WRONG);
 
     const newMember: MemberInput = req.body;
+
     newMember.memberImage = file?.path;
     newMember.memberType = MemberType.RESTARAUNT;
     const result = await memberService.processSignup(newMember);

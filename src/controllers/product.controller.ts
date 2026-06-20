@@ -12,7 +12,7 @@ productController.getAllProduct = async (req: Request, res: Response) => {
   try {
     console.log("goHame");
     const data = await productService.getAllProduct();
-    console.log(data);
+
     res.render("products", { products: data });
   } catch (err) {
     console.log("Error goHome:", err);

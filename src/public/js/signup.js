@@ -36,7 +36,7 @@ function validateSignUpForm() {
     memberPassword == "" ||
     confirmPassword == ""
   ) {
-    alert("please, insert all required unputs!");
+    alert("please, insert all required inputs!");
     return false;
   }
   if (memberPassword != confirmPassword) {

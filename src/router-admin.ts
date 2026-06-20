@@ -3,51 +3,49 @@ import restarauntController from "./controllers/restaraunt.controller";
 import productController from "./controllers/product.controller";
 import makeUploader from "./libs/utils/uploader";
 
-const router = express.Router();
+const routerAdmin = express.Router();
 
 //Restoran
-router.get("/", restarauntController.goHome);
-router
-  .get("/login", restarauntController.getLogin)
-  .post("/login", restarauntController.processLogin);
-router
-  .get("/signup", restarauntController.getSignup)
-  .post(
-    "/signup",
-    makeUploader("members").single("memberImage"),
-    restarauntController.processSignup,
-  );
-router.get("/logout", restarauntController.logout);
-router.get("/check-me", restarauntController.checkAuthSession);
+routerAdmin.get("/", restarauntController.goHome); //trad? rest?
+routerAdmin
+  .get("/login", restarauntController.getLogin) //trad? rest?
+  .post("/login", restarauntController.processLogin); //trad? rest?
+routerAdmin.get("/signup", restarauntController.getSignup).post(
+  "/signup",
+  makeUploader("members").single("memberImage"), //req.file
+  restarauntController.processSignup,
+);
+routerAdmin.get("/logout", restarauntController.logout);
+routerAdmin.get("/check-me", restarauntController.checkAuthSession);
 
 //product
-router.get(
+routerAdmin.get(
   "/product/all",
   restarauntController.verifyRestaurant,
   productController.getAllProduct,
 );
-router.post(
+routerAdmin.post(
   "/product/create",
   restarauntController.verifyRestaurant,
-  makeUploader("products").array("productImages", 5),
+  makeUploader("products").array("productImages", 5), //req.files
   productController.createNewProduct,
 );
-router.post(
+routerAdmin.post(
   "/product/:id",
   restarauntController.verifyRestaurant,
   productController.updateChoosenProduct,
 );
 
 //User
-router.get(
+routerAdmin.get(
   "/user/all",
   restarauntController.verifyRestaurant,
   restarauntController.getUsers,
 );
-router.post(
+routerAdmin.post(
   "/user/edit",
   restarauntController.verifyRestaurant,
   restarauntController.updateChosenUser,
 );
 
-export default router;
+export default routerAdmin;

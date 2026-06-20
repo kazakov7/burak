@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+//tcp1
 import mongoose from "mongoose";
 import app from "./app";
 mongoose.set("strictQuery", true); // warningni o'chirish
