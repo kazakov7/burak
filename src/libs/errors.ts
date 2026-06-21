@@ -17,6 +17,7 @@ export enum Message {
 
   USED_NICK_PHONE = "You are inserting already used phone or nick!",
   NO_MEMBER_NICK = "No member with that member nick!",
+  BLOCKED_USER = "You have been blocked, contact restaraunt",
   WRONG_PASSWORD = "Wrong password, pleasse try again1",
   NOT_AUTHENTICATED = "You are not authenticated, Please login first",
 }
