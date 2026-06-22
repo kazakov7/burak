@@ -1,16 +1,26 @@
-// //MIT TASK "V"
-function countChars(word) {
-  obj = {};
-  for (x of word) {
-    if (obj[x]) {
-      obj[x] += 1;
-    } else {
-      obj[x] = 1;
-    }
+//MIT TASK "W"
+function test(arr, lengs) {
+  new_arr = [];
+  while (arr.length) {
+    new_arr.push(arr.splice(0, lengs));
   }
-  return obj;
+  return new_arr;
 }
-console.log(countChars("hellos"));
+console.log(test([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+
+// //MIT TASK "V"
+// function countChars(word) {
+//   obj = {};
+//   for (x of word) {
+//     if (obj[x]) {
+//       obj[x] += 1;
+//     } else {
+//       obj[x] = 1;
+//     }
+//   }
+//   return obj;
+// }
+// console.log(countChars("hellos"));
 
 // //MIT TASK "U"
 // function sumOdds(num) {
