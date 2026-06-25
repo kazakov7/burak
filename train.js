@@ -1,12 +1,30 @@
-//MIT TASK "W"
-function test(arr, lengs) {
-  new_arr = [];
-  while (arr.length) {
-    new_arr.push(arr.splice(0, lengs));
+//MIT TASK "X"
+function countOccurrences(obj, key) {
+  let count = 0;
+  keys = Object.keys(obj);
+  for (x of keys) {
+    if (x == key) {
+      count++;
+    }
+    if (typeof obj[x] == "object") {
+      count += countOccurrences(obj[x], key);
+    }
   }
-  return new_arr;
+  return count;
 }
-console.log(test([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+console.log(
+  countOccurrences({ model: "hello", m: 5, c: { model: "b" } }, "model"),
+);
+
+//MIT TASK "W"
+// function test(arr, lengs) {
+//   new_arr = [];
+//   while (arr.length) {
+//     new_arr.push(arr.splice(0, lengs));
+//   }
+//   return new_arr;
+// }
+// console.log(test([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
 
 // //MIT TASK "V"
 // function countChars(word) {
