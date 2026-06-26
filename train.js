@@ -1,20 +1,31 @@
 //MIT TASK "X"
-function countOccurrences(obj, key) {
-  let count = 0;
-  keys = Object.keys(obj);
-  for (x of keys) {
-    if (x == key) {
-      count++;
-    }
-    if (typeof obj[x] == "object") {
-      count += countOccurrences(obj[x], key);
+function test(arr1, arr2) {
+  let new_arr = [];
+  for (x of arr1) {
+    if (arr2.includes(x)) {
+      new_arr.push(x);
     }
   }
-  return count;
+  return new_arr;
 }
-console.log(
-  countOccurrences({ model: "hello", m: 5, c: { model: "b" } }, "model"),
-);
+console.log(test([1, 2, 3], [3, 2, 0]));
+//MIT TASK "X"
+// function countOccurrences(obj, key) {
+//   let count = 0;
+//   keys = Object.keys(obj);
+//   for (x of keys) {
+//     if (x == key) {
+//       count++;
+//     }
+//     if (typeof obj[x] == "object") {
+//       count += countOccurrences(obj[x], key);
+//     }
+//   }
+//   return count;
+// }
+// console.log(
+//   countOccurrences({ model: "hello", m: 5, c: { model: "b" } }, "model"),
+// );
 
 //MIT TASK "W"
 // function test(arr, lengs) {
