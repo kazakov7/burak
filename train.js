@@ -1,14 +1,26 @@
 //MIT TASK "X"
-function test(arr1, arr2) {
-  let new_arr = [];
-  for (x of arr1) {
-    if (arr2.includes(x)) {
-      new_arr.push(x);
+function test(arr) {
+  count = 0;
+  for (x of arr) {
+    if (x % 2 == 0) {
+      count += x;
     }
   }
-  return new_arr;
+  return count;
 }
-console.log(test([1, 2, 3], [3, 2, 0]));
+console.log(test([1, 2, 3]));
+
+//MIT TASK "X"
+// function test(arr1, arr2) {
+//   let new_arr = [];
+//   for (x of arr1) {
+//     if (arr2.includes(x)) {
+//       new_arr.push(x);
+//     }
+//   }
+//   return new_arr;
+// }
+// console.log(test([1, 2, 3], [3, 2, 0]));
 //MIT TASK "X"
 // function countOccurrences(obj, key) {
 //   let count = 0;
