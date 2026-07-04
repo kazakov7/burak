@@ -25,5 +25,14 @@ class AuthService {
       );
     });
   }
+
+  public async checkAuth(token: string): Promise<Member> {
+    const result: Member = (await jwt.verify(
+      token,
+      process.env.TOKEN_SECRET as string,
+    )) as Member;
+    console.log(`"----auth membernick: ${result.memberNick}----`);
+    return result;
+  }
 }
 export default AuthService;
