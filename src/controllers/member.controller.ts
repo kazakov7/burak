@@ -1,6 +1,11 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { T } from "../libs/types/common";
-import { LoginInput, Member, MemberInput } from "../libs/types/member";
+import {
+  ExtendedRequest,
+  LoginInput,
+  Member,
+  MemberInput,
+} from "../libs/types/member";
 import MemberService from "../models/member.service";
 import Errors, { HttpCode, Message } from "../libs/errors";
 import { token } from "morgan";
@@ -50,21 +55,53 @@ memberController.login = async (req: Request, res: Response) => {
   }
 };
 
-memberController.verifyAuth = async (req: Request, res: Response) => {
+memberController.logut = (req: ExtendedRequest, res: Response) => {
   try {
-    let member = null;
-    const token = req.cookies["accesToken"];
-    if (token) member = await authService.checkAuth(token);
+    console.log("logut");
+    res.cookie("accesToken", null, { maxAge: 0, httpOnly: true });
+    res.status(HttpCode.OK).json({ logout: true });
+  } catch (err) {
+    console.log("Error logut:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
+  }
+};
 
-    if (!member)
+memberController.verifyAuth = async (
+  req: ExtendedRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const token = req.cookies["accesToken"];
+    if (token) req.member = await authService.checkAuth(token);
+
+    if (!req.member)
       throw new Errors(HttpCode.UNAUTHORIZED, Message.NOT_AUTHENTICATED);
-    console.log("member", member);
-    res.status(HttpCode.OK).json({ member: member });
+
+    next();
   } catch (err) {
     console.log("Error verifyAuth:", err);
     if (err instanceof Errors) res.status(err.code).json(err);
     else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
+
+memberController.retrieveAuth = async (
+  req: ExtendedRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const token = req.cookies["accesToken"];
+    if (token) req.member = await authService.checkAuth(token);
+    next();
+  } catch (err) {
+    console.log("Error verifyAuth:", err);
+    next();
+  }
+};
+
+let a: number = 3;
 
 export default memberController;
