@@ -9,6 +9,10 @@ router.post(
   memberController.verifyAuth,
   memberController.logut,
 );
-router.get("/member/detail", memberController.verifyAuth);
+router.get(
+  "/member/detail",
+  memberController.verifyAuth,
+  memberController.getMemberDetail,
+);
 
 export default router;

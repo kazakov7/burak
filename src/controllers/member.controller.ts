@@ -66,6 +66,20 @@ memberController.logut = (req: ExtendedRequest, res: Response) => {
     else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
+memberController.getMemberDetail = async (
+  req: ExtendedRequest,
+  res: Response,
+) => {
+  try {
+    console.log("logetMemberDetailgut");
+    const result = await memberService.getMemberDetail(req.member);
+    res.status(HttpCode.OK).json({ result: result });
+  } catch (err) {
+    console.log("Error logut:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
+  }
+};
 
 memberController.verifyAuth = async (
   req: ExtendedRequest,

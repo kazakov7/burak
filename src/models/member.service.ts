@@ -64,6 +64,20 @@ class MemberService {
       .exec()) as unknown as Member;
   }
 
+  public async getMemberDetail(input: Member): Promise<Member> {
+    const id = shapeIntoMongooseObjectId(input._id);
+    const result = this.memberModel
+      .findOne({
+        _id: id,
+        memberStatus: MemberStatus.ACTIVE,
+      })
+      .exec();
+
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    return result as unknown as Member;
+  }
+
   //SSR
   public async processSignup(input: MemberInput): Promise<Member> {
     const exist = await this.memberModel
