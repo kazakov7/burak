@@ -3,6 +3,7 @@ import memberController from "./controllers/member.controller";
 import makeUploader from "./libs/utils/uploader";
 const router = express.Router();
 
+router.get("/member/restaraunt", memberController.getRestaraunt); //trad? rest?
 router.post("/member/login", memberController.login);
 router.post("/member/signup", memberController.signup);
 router.get(

@@ -7,7 +7,6 @@ const routerAdmin = express.Router();
 
 //Restoran
 
-routerAdmin.get("/restaraunt", restarauntController.getRestaraunt); //trad? rest?
 routerAdmin.get("/", restarauntController.goHome); //trad? rest?
 routerAdmin
   .get("/login", restarauntController.getLogin) //trad? rest?

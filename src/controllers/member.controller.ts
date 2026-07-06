@@ -142,5 +142,17 @@ memberController.updateMember = async (req: ExtendedRequest, res: Response) => {
     else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
+memberController.getRestaraunt = async (req: Request, res: Response) => {
+  try {
+    console.log("getRestaraunt");
+
+    const result = await memberService.getRestaraunt();
+    res.status(HttpCode.OK).json(result);
+  } catch (err) {
+    console.log("Error getRestaraunt:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
+  }
+};
 
 export default memberController;
