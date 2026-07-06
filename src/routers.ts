@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/member/restaraunt", memberController.getRestaraunt); //trad? rest?
 router.post("/member/login", memberController.login);
 router.post("/member/signup", memberController.signup);
-router.get(
+router.post(
   "/member/logut",
   memberController.verifyAuth,
   memberController.logut,
