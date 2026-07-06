@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/member/login", memberController.login);
 router.post("/member/signup", memberController.signup);
-router.post(
+router.get(
   "/member/logut",
   memberController.verifyAuth,
   memberController.logut,
@@ -21,5 +21,6 @@ router.post(
   memberController.verifyAuth,
   memberController.updateMember,
 );
+router.get("/member/top-users", memberController.getTopUsers);
 
 export default router;
