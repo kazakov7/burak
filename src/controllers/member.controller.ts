@@ -5,6 +5,7 @@ import {
   LoginInput,
   Member,
   MemberInput,
+  MemberUpdateInput,
 } from "../libs/types/member";
 import MemberService from "../models/member.service";
 import Errors, { HttpCode, Message } from "../libs/errors";
@@ -90,7 +91,7 @@ memberController.verifyAuth = async (
     const token = req.cookies["accesToken"];
     if (token) req.member = await authService.checkAuth(token);
 
-    if (!req.member)
+    if (!token)
       throw new Errors(HttpCode.UNAUTHORIZED, Message.NOT_AUTHENTICATED);
 
     next();
@@ -116,6 +117,18 @@ memberController.retrieveAuth = async (
   }
 };
 
-let a: number = 3;
+memberController.updateMember = async (req: ExtendedRequest, res: Response) => {
+  try {
+    console.log("updateMember");
+    const input: MemberUpdateInput = req.body;
+    if (req.file) input.memberImage = req.file.path;
+    const result = await memberService.updateMember(req.member, input);
+    res.status(HttpCode.OK).json(result);
+  } catch (err) {
+    console.log("Error updateMember:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
+  }
+};
 
 export default memberController;
