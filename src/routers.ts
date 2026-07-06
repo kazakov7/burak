@@ -7,7 +7,7 @@ router.get("/member/restaraunt", memberController.getRestaraunt); //trad? rest?
 router.post("/member/login", memberController.login);
 router.post("/member/signup", memberController.signup);
 router.post(
-  "/member/logut",
+  "/member/logout",
   memberController.verifyAuth,
   memberController.logut,
 );
