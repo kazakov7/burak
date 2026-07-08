@@ -1,4 +1,4 @@
-import { mongo } from "mongoose";
+import { mongo, ObjectId } from "mongoose";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 import Errors, { HttpCode, Message } from "../libs/errors";
 import {
@@ -18,7 +18,7 @@ class ProductService {
     this.productModel = ProductModel;
   }
   //SPA-single paage application
-  public async getProduct(inquery: ProductInquery): Promise<Product[]> {
+  public async getProducts(inquery: ProductInquery): Promise<Product[]> {
     const match: T = { productStatus: ProductStatus.PROCESS };
     if (inquery.productCollection) {
       match.productCollection = inquery.productCollection;
@@ -41,6 +41,18 @@ class ProductService {
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result;
+  }
+  public async getProduct(memberId: ObjectId, id: string): Promise<Product> {
+    const productId = shapeIntoMongooseObjectId(id);
+    const result = await this.productModel
+      .findOne({
+        _id: productId,
+        productStatus: ProductStatus.PROCESS,
+      })
+      .exec();
+
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result as unknown as Product;
   }
 
   //SSR
