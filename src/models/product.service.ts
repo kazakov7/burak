@@ -4,9 +4,12 @@ import Errors, { HttpCode, Message } from "../libs/errors";
 import {
   Product,
   ProductInput,
+  ProductInquery,
   ProductUpdateInput,
 } from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
+import { T } from "../libs/types/common";
+import { ProductStatus } from "../libs/enums/product.enum";
 
 class ProductService {
   private readonly productModel;
@@ -14,6 +17,32 @@ class ProductService {
   constructor() {
     this.productModel = ProductModel;
   }
+  //SPA-single paage application
+  public async getProduct(inquery: ProductInquery): Promise<Product[]> {
+    const match: T = { productStatus: ProductStatus.PROCESS };
+    if (inquery.productCollection) {
+      match.productCollection = inquery.productCollection;
+    }
+    if (inquery.search) {
+      match.productName = { $regex: new RegExp(inquery.search, "i") };
+    }
+    const sort: T =
+      inquery.order === "productPrice"
+        ? { [inquery.order]: 1 }
+        : { [inquery.order]: -1 };
+
+    const result = await this.productModel
+      .aggregate([
+        { $match: match },
+        { $sort: sort },
+        { $skip: (inquery.page * 1 - 1) * inquery.limit },
+        { $limit: inquery.limit * 1 },
+      ])
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
+  }
+
   //SSR
   public async getAllProduct(): Promise<Product[]> {
     const result = await this.productModel.find().exec();

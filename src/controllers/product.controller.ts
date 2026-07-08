@@ -3,19 +3,41 @@ import { T } from "../libs/types/common";
 import { Request, Response } from "express";
 import ProductService from "../models/product.service";
 import { AdminRequest } from "../libs/types/member";
-import { ProductInput } from "../libs/types/product";
+import { ProductInput, ProductInquery } from "../libs/types/product";
+import { ProductCollection } from "../libs/enums/product.enum";
 
 const productService = new ProductService();
 
 const productController: T = {};
+productController.getProduct = async (req: Request, res: Response) => {
+  try {
+    console.log("getProduct");
+    const { order, page, limit, productCollection, search } = req.query;
+    const inquery: ProductInquery = {
+      order: String(order),
+      page: Number(page),
+      limit: Number(limit),
+    };
+    if (productCollection) {
+      inquery.productCollection = productCollection as ProductCollection;
+    }
+    if (search) inquery.search = String(search);
+    const result = await productService.getProduct(inquery);
+    res.status(HttpCode.OK).json(result);
+  } catch (err) {
+    console.log("Error getProduct:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
+  }
+};
+
 productController.getAllProduct = async (req: Request, res: Response) => {
   try {
     console.log("goHame");
     const data = await productService.getAllProduct();
-
     res.render("products", { products: data });
   } catch (err) {
-    console.log("Error goHome:", err);
+    console.log("Error getAllProduct:", err);
     if (err instanceof Errors) res.status(err.code).json(err);
     else res.status(Errors.standart.code).json(Errors.standart);
   }
