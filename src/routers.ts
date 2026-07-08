@@ -4,7 +4,7 @@ import makeUploader from "./libs/utils/uploader";
 import productController from "./controllers/product.controller";
 const router = express.Router();
 
-router.get("/member/restaraunt", memberController.getRestaraunt); //trad? rest?
+router.get("/member/restaurant", memberController.getRestaraunt);
 router.post("/member/login", memberController.login);
 router.post("/member/signup", memberController.signup);
 router.post(
