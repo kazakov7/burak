@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
-import MemberService from "../models/member.service";
 
 const MemberSchema = new Schema(
   {

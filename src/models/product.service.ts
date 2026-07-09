@@ -10,12 +10,17 @@ import {
 import ProductModel from "../schema/Product.model";
 import { T } from "../libs/types/common";
 import { ProductStatus } from "../libs/enums/product.enum";
+import { ViewInput } from "../libs/types/view.group";
+import { ViewGroup } from "../libs/enums/view.group";
+import ViewService from "./View.service";
 
 class ProductService {
   private readonly productModel;
+  public viewService;
 
   constructor() {
     this.productModel = ProductModel;
+    this.viewService = new ViewService();
   }
   //SPA-single paage application
   public async getProducts(inquery: ProductInquery): Promise<Product[]> {
@@ -44,7 +49,7 @@ class ProductService {
   }
   public async getProduct(memberId: ObjectId, id: string): Promise<Product> {
     const productId = shapeIntoMongooseObjectId(id);
-    const result = await this.productModel
+    let result = await this.productModel
       .findOne({
         _id: productId,
         productStatus: ProductStatus.PROCESS,
@@ -52,6 +57,30 @@ class ProductService {
       .exec();
 
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    if (memberId) {
+      //Check view log existe
+      const input: ViewInput = {
+        memberId: memberId,
+        viewRefId: productId,
+        viewGroup: ViewGroup.PRODUCT,
+      };
+      const existView = await this.viewService.checkViewExitence(input);
+      console.log("exist: ", !!existView);
+      if (!existView) {
+        //InsertView
+        await this.viewService.insertMemberView(input);
+
+        //increase counts
+        result = await this.productModel
+          .findByIdAndUpdate(
+            productId,
+            { $inc: { productViews: +1 } },
+            { new: true },
+          )
+          .exec();
+      }
+    }
+
     return result as unknown as Product;
   }
 
