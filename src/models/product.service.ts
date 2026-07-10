@@ -44,9 +44,8 @@ class ProductService {
         { $limit: inquery.limit * 1 },
       ])
       .exec();
-
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-    return result as unknown as Product[];
+    return result;
   }
   ///////////////////≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈getProduct≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈////////////////////
   public async getProduct(memberId: ObjectId, id: string): Promise<Product> {
