@@ -2,6 +2,7 @@ import express from "express";
 import memberController from "./controllers/member.controller";
 import makeUploader from "./libs/utils/uploader";
 import productController from "./controllers/product.controller";
+import orderController from "./controllers/order.controller";
 const router = express.Router();
 
 router.get("/member/restaurant", memberController.getRestaraunt);
@@ -25,7 +26,7 @@ router.post(
 );
 router.get("/member/top-users", memberController.getTopUsers);
 
-//PRODUCT
+//≈≈≈≈≈≈≈≈≈≈≈PRODUCT≈≈≈≈≈≈≈≈≈≈≈≈≈
 router.get("/product/all", productController.getProducts);
 router.get(
   "/product/:id",
@@ -33,4 +34,10 @@ router.get(
   productController.getProduct,
 );
 
+//≈≈≈≈≈≈≈≈≈≈≈ORDER≈≈≈≈≈≈≈≈≈≈≈≈≈
+router.post(
+  "/order/create",
+  memberController.verifyAuth,
+  orderController.createOrder,
+);
 export default router;
