@@ -12,7 +12,7 @@ import { T } from "../libs/types/common";
 import { ProductStatus } from "../libs/enums/product.enum";
 import { ViewInput } from "../libs/types/view.group";
 import { ViewGroup } from "../libs/enums/view.group";
-import ViewService from "./View.service";
+import ViewService from "./VIew.service";
 
 class ProductService {
   private readonly productModel;
@@ -44,8 +44,9 @@ class ProductService {
         { $limit: inquery.limit * 1 },
       ])
       .exec();
+
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-    return result;
+    return result as unknown as Product[];
   }
   ///////////////////≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈getProduct≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈////////////////////
   public async getProduct(memberId: ObjectId, id: string): Promise<Product> {

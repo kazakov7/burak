@@ -1,6 +1,6 @@
 import Errors, { HttpCode, Message } from "../libs/errors";
 import { View, ViewInput } from "../libs/types/view.group";
-import VIewModels from "../schema/VIew.models";
+import VIewModels from "../schema/View.models";
 
 class ViewService {
   private readonly viewModel;

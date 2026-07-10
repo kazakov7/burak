@@ -56,7 +56,7 @@ memberController.login = async (req: Request, res: Response) => {
   }
 };
 
-memberController.logut = (req: ExtendedRequest, res: Response) => {
+memberController.logout = (req: ExtendedRequest, res: Response) => {
   try {
     console.log("logut");
     res.cookie("accesToken", null, { maxAge: 0, httpOnly: true });
