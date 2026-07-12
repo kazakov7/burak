@@ -77,6 +77,20 @@ class MemberService {
       .lean()
       .exec()) as unknown as Member;
   }
+  public async addUserPoint(member: Member, point: number): Promise<Member> {
+    const memberId = shapeIntoMongooseObjectId(member._id);
+    const result = await this.memberModel.findOneAndUpdate(
+      {
+        _id: memberId,
+        memberType: MemberType.USER,
+        memberStatus: MemberStatus.ACTIVE,
+      },
+      { $inc: { memberPoints: point } },
+      { new: true },
+    );
+
+    return result as unknown as Member;
+  }
 
   public async getMemberDetail(input: Member): Promise<Member> {
     const id = shapeIntoMongooseObjectId(input._id);
