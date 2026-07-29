@@ -5,6 +5,7 @@ import routerAdmin from "./router-admin";
 import morgan from "morgan";
 import { MORGAN_FORMAT } from "./libs/config";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import session from "express-session";
 import ConnectMongoDb from "connect-mongodb-session";
@@ -19,6 +20,14 @@ const store = new MongoDbStore({
 
 // 1-Enterance
 const app = express();
+app.use(
+  cors({
+    origin: false,
+    credentials: true,
+  }),
+);
+app.use(express.static(path.join(__dirname, "public")));
+// ... qolgani o'zgarmaydi
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static("./uploads"));
 app.use(express.urlencoded({ extended: true }));
