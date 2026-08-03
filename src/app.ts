@@ -3,9 +3,9 @@ import path from "path";
 import router from "./routers";
 import routerAdmin from "./router-admin";
 import morgan from "morgan";
-import { MORGAN_FORMAT } from "./libs/config";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { MORGAN_FORMAT } from "./libs/config";
 
 import session from "express-session";
 import ConnectMongoDb from "connect-mongodb-session";
