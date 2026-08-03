@@ -22,7 +22,7 @@ const store = new MongoDbStore({
 const app = express();
 app.use(
   cors({
-    origin: false,
+    origin: true,
     credentials: true,
   }),
 );
